@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>Post Detail pages</title>
+    <!-- Bootstrap core CSS -->
+    <link href="dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom styles for this template -->
+    <link href="blog.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Playfair+Display:700,900" rel="stylesheet">
+  </head>
+  <body>
+    <div class="container">
+      <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand text-white" href="#">My Village Blog</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExample09" aria-controls="navbarsExample09" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarsExample09">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+              <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item dropdown dmenu">
+              <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown09" data-toggle="dropdown">AboutUs</a>
+              <div class="dropdown-menu sm-menu" aria-labelledby="dropdown09">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown dmenu">
+              <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Solutions</a>
+              <div class="dropdown-menu sm-menu" aria-labelledby="dropdown09">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown dmenu">
+              <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Articles</a>
+              <div class="dropdown-menu sm-menu" aria-labelledby="dropdown09">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown dmenu">
+              <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Careers</a>
+              <div class="dropdown-menu sm-menu" aria-labelledby="dropdown09">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+            <li class="nav-item dropdown dmenu">
+              <a class="nav-link dropdown-toggle" href="http://example.com" id="dropdown09" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ContactUs</a>
+              <div class="dropdown-menu sm-menu" aria-labelledby="dropdown09">
+                <a class="dropdown-item" href="#">Action</a>
+                <a class="dropdown-item" href="#">Another action</a>
+                <a class="dropdown-item" href="#">Something else here</a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <main role="main" class="container">
+      <div class="row mt-5">
+        <div class="col-md-8 blog-main">
+          <h3 class="pb-3 mb-4 border-bottom">
+            From the json placeholder Author Details
+          </h3>
+          <div class="card flex-md-row mb-4 box-shadow h-md-250">
+            <div class="card-body d-flex flex-column align-items-start">
+              <div id="blog_content"></div>
+            </div>
+          </div>
+          <!-- /.blog-post -->
+          <nav class="blog-pagination">
+            <a class="btn btn-outline-primary" href="index.html"> << Back to Posts</a>
+          </nav>
+        </div><!-- /.blog-main -->
+
+        <aside class="col-md-4 mt-5 blog-sidebar">
+          <div class="p-3 mb-3 bg-light rounded">
+            <h4 class="">Author Details</h4>
+            <p class="mb-0 userdetails">Etiam porta <em>Author Name</em> mollis euismod. Cras mattis consectetur purus sit amet fermentum. Aenean lacinia bibendum nulla sed consectetur.</p>
+          </div>
+        </aside><!-- /.blog-sidebar -->
+      </div><!-- /.row -->
+    </main><!-- /.container -->
+    <footer class="blog-footer">
+      <p>Blog template built for posts.</p>
+      <p>
+        <a href="#">Back to top</a>
+      </p>
+    </footer>
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+    <script src="assets/js/vendor/jquery-slim.min.js" type="text/javascript"></script>
+    <script>window.jQuery || document.write('<script src="assets/js/vendor/jquery-slim.min.js" type="text/javascript"><\/script>')</script>
+    <script src="dist/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+      $('.navbar-light .dmenu').hover(function () {
+              $(this).find('.sm-menu').first().stop(true, true).slideDown(150);
+          }, function () {
+              $(this).find('.sm-menu').first().stop(true, true).slideUp(105)
+        });
+      });
+      // for posts list api
+      fetch('http://jsonplaceholder.typicode.com/posts/').then(response => response.json()).then(
+        posts => {
+                  let str ='<div class="blog-post">';
+                  //let postclicked = location.search
+                  let params = (new URL(document.location)).searchParams;
+                  let userid = parseInt(params.get('username') - 1); // to get userid from location.search param
+                  str +='<h5 class="d-inline-block mb-2 text-primary">'+ userid + " " + posts[userid].title+'</h5>';
+                  str +='<p class="mb-1 text-muted">'+ posts[userid].body+'</p>';
+                  //console.log(str);
+                  str +='</div>';
+                document.querySelector("#blog_content").innerHTML = str;
+        });
+
+        // for posts list api
+        fetch('http://jsonplaceholder.typicode.com/users/').then(response => response.json()).then(
+            posts => {
+                let str = "<div class='list-group'>";
+                //let postclicked = location.search
+                let params = (new URL(document.location)).searchParams;
+                let userid = parseInt(params.get('username') - 1); // to get userid from location.search param
+                //console.log(data.title);
+                str ='<li class="list-group-item"><strong class="text-primary">Author Name : </strong>'+ posts[userid].name+'</li>';
+                str +='<li class="list-group-item"><strong class="text-primary">Website : </strong>'+ posts[userid].website+'</li>';
+                str +='</div>';
+                document.querySelector(".userdetails").innerHTML = str;
+        }).catch(
+            document.querySelector('.userdetails').innerHTML = '<p class="text-danger"><strong>User Details Not Found for this post.</strong></p>'
+        );
+    </script>
+  </body>
+</html>
